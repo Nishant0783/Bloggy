@@ -1,0 +1,21 @@
+.gradientBg {
+    position: relative;
+    background: rgb(229,231,235);
+}
+
+.gradientBg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    border-top-left-radius: 150px;
+}
+
+@media (max-width: 1000px) {
+    .gradientBg::after {
+        content: none;
+    }
+}

@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeSwiper from '../Swiper/HomeSwiper';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
+import DiscoverBlogBtn from '../Buttons/DiscoverBlogBtn';
 
 const CategoryBlogs = () => {
     return (
@@ -21,9 +21,7 @@ const CategoryBlogs = () => {
                         </div>
                     </div>
                     <div className='text-[1.5rem] font-body font-semibold text-blue-600'>
-                        <button>
-                            Discover blogs <FontAwesomeIcon icon={faChevronRight} />
-                        </button>
+                        <DiscoverBlogBtn />
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,16 @@ import LoginBtn from '../Buttons/LoginBtn';
 import SignupBtn from '../Buttons/SignupBtn';
 
 const Navbar = () => {
+    const location = useLocation();
+
+    const isLoginOrSignup = () => {
+        return location.pathname === '/login' || location.pathname === '/signup'
+    }
+
+    if(isLoginOrSignup()) {
+        return null;
+    }
+    
     return (
         <div className='w-full bg-gray-100'>
             <div className='grid grid-cols-3 text-[1.3rem] font-[500] font-navbar max-w-[1500px] mx-auto py-[10px] px-[50px] max-[896px]:text-[1rem] max-[1024px]:text-[1.1rem] max-[510px]:grid-cols-2 '>
