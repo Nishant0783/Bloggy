@@ -114,7 +114,7 @@ const SignUp = () => {
                   value={confirmPassword}
                   onChange={handleConfirmPassword}
                   classes={'outline-0 bg-gray-200 px-[10px] text-[1.2rem] py-[5px]'}
-                  otherAttributes={{required: true}}
+                  otherAttributes={{ required: true }}
                 />
               </div>
             </div>
@@ -126,8 +126,6 @@ const SignUp = () => {
               />
             </div>
           </form>
-
-
         </div>
       </div>
     </div>

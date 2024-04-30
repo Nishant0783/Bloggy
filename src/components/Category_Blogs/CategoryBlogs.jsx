@@ -21,6 +21,7 @@ const CategoryBlogs = () => {
                         </div>
                     </div>
                     <div className='text-[1.5rem] font-body font-semibold text-blue-600'>
+                        
                         <DiscoverBlogBtn />
                     </div>
                 </div>
