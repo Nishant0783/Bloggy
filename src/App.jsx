@@ -7,6 +7,7 @@ import ContactUs from './pages/ContactUs/ContactUs';
 import Login from './components/Login/Login';
 import SignUp from './components/Signup/SignUp';
 import DiscoverBlogs from './components/DiscoverBlogs/DiscoverBlogs';
+import CreateBlog from './components/CreateBlog/CreateBlog';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "discover-blogs",
         element: <DiscoverBlogs />
+      },
+      {
+        path: "create-blog",
+        element: <CreateBlog />
       }
     ]
   }

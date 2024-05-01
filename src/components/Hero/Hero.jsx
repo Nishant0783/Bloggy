@@ -23,7 +23,7 @@ const Hero = () => {
                             <p>How about starting your blogging journey with us for free ?</p>
                         </div>
                         <div>
-                           <CreateBlogBtn />
+                           <CreateBlogBtn link='/create-blog'/>
                         </div>
                     </div>
                 </div>
