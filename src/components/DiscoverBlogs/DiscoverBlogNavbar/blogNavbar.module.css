@@ -1,0 +1,15 @@
+.scrollContainer {
+    overflow-x: hidden; /* Initially hide scrollbar */
+}
+
+@media (max-width: 1010px) {
+    .scrollContainer {
+        overflow-x: auto; /* Enable scrollbar for screens less than 1010px */
+        -webkit-overflow-scrolling: touch; /* For smooth scrolling on iOS */
+        scrollbar-width: 30px; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+    /* .scrollContainer::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    /* } */ 
+}
