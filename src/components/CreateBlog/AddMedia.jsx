@@ -17,8 +17,8 @@ const AddMedia = () => {
         }
     }
     return (
-        <div className='px-[30px]'>
-            <div className='flex flex-col font-body text-[#2c2c2c] bg-gray-200 px-[30px] py-[20px] gap-y-[10px]'>
+        <div className='px-[30px] max-[1300px]:px-0'>
+            <div className='flex flex-col font-body text-[#2c2c2c] bg-gray-200 px-[30px] py-[20px] gap-y-[10px] '>
                 <div className='text-[1.2rem] font-semibold'>
                     <label htmlFor='imageUploader'>ADD MEDIA</label>
                 </div>
@@ -28,10 +28,15 @@ const AddMedia = () => {
                         name='imageUploader'
                         accept='images/*'
                         onChange={handleFileChange}
+                        className='flex flex-col w-full'
                     />
                 </div>
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                {image && <p>Selected file: {image.name}</p>}
+                {image && (
+                    <p className="mt-2">
+                        Selected file: {image.name}
+                    </p>
+                )}
             </div>
         </div>
 

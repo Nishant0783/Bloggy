@@ -6,7 +6,7 @@ const CreateBlog = () => {
   return (
     <div className='w-full bg-white'>
         <div className='max-w-[1500px] mx-auto px-[50px] py-[50px]'>
-            <div className='grid grid-cols-6 gap-x-[30px]'>
+            <div className='grid grid-cols-6 gap-x-[30px] max-[1300px]:grid-cols-1 max-[1300px]:gap-y-[30px]'>
                 <CreateBlogLeft />
                 <CreateBlogRight />
             </div>          

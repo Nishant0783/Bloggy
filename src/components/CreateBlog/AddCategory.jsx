@@ -10,10 +10,10 @@ const AddCategory = () => {
     };
 
     const navLinks = [
-        {
-            id: uuidv4(),
-            name: 'MOST RECENTS'
-        },
+        // {
+        //     id: uuidv4(),
+        //     name: 'MOST RECENTS'
+        // },
         {
             id: uuidv4(),
             name: 'TECHNOLOGY',
@@ -36,8 +36,8 @@ const AddCategory = () => {
         },
     ];
     return (
-        <div className='px-[30px]'>
-            <div className='flex flex-col font-body text-[#2c2c2c] bg-gray-200 px-[30px] py-[20px] gap-y-[10px]'>
+        <div className='px-[30px] max-[1300px]:px-0'>
+            <div className='flex flex-col font-body text-[#2c2c2c] bg-gray-200 px-[30px] py-[20px] gap-y-[10px] w-full'>
                 <div className='text-[1.2rem] font-bold'>
                     <span>SELECT CATEGORY</span>
                 </div>
@@ -45,13 +45,13 @@ const AddCategory = () => {
                     <select
                         value={selectedOption}
                         onChange={handleSelectChange}
-                        className='outline-none text-[1.2rem] px-[5px] py-[5px]'
+                        className='outline-none text-[1.2rem] px-[5px] py-[5px] max-w-[485px] w-full max-[485px]:text-[1rem] max-[350px]:w-[100%]'
                     >
                         <option value="">
                             Select a category
                         </option>
                         {navLinks.map((link) => (
-                            <option key={link.id} value={link.name}>{link.name}</option>
+                            <option key={link.id} value={link.name} className='text-[1rem] max-w-[485px] md:text-[1.2rem]'>{link.name}</option>
                         ))}
                     </select>
 
