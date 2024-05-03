@@ -1,10 +1,16 @@
 import React, { useState } from 'react'
 import Input from '../Input/Input'
 import SubmitBtn from '../Buttons/SubmitBtn';
+import authenticationServices from '../../appwrite/auth';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { login } from '../../features/authSlice.js'
 
 const Login = () => {
   const [owner, setowner] = useState('');
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
 
   const handleOwner = (e) => {
     setowner(e.target.value)
@@ -16,8 +22,19 @@ const Login = () => {
     console.log(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    const session = await authenticationServices.loginUser({
+      email: owner,
+      password
+    })
+    if (session) {
+      const userData = await authenticationServices.getCurrentUser(session)
+      if (userData) {
+        dispatch(login(userData))
+        navigate('/')
+      }
+    }
   }
 
 
@@ -44,7 +61,7 @@ const Login = () => {
                   value={owner}
                   onChange={handleOwner}
                   classes={'outline-0 bg-gray-200 px-[10px] text-[1.2rem] py-[5px]'}
-                  otherAttributes={{required: true}}
+                  otherAttributes={{ required: true }}
                 />
               </div>
               <div className='flex flex-col'>
@@ -58,7 +75,7 @@ const Login = () => {
                   value={password}
                   onChange={handlePassword}
                   classes={'outline-0 bg-gray-200 px-[10px] text-[1.2rem] py-[5px]'}
-                  otherAttributes={{required: true}}
+                  otherAttributes={{ required: true }}
                 />
               </div>
             </div>

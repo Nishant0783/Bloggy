@@ -1,10 +1,9 @@
 import React from 'react'
 import logo from '../../assets/logo.svg'
 import { Link, useLocation } from 'react-router-dom'
-
-import LoginBtn from '../Buttons/LoginBtn';
 import SignupBtn from '../Buttons/SignupBtn';
 import Socials from './Socials';
+import AuthenticationBtn from '../Buttons/AuthenticationBtn';
 
 const Footer = () => {
   const date = new Date();
@@ -53,8 +52,11 @@ const Footer = () => {
             </div>
             <div className='flex gap-x-[25px] items-center max-[330px]:flex-col max-[330px]:gap-y-[20px] max-[330px]:items-start'>
               <div className='font-semibold text-[1.2rem]'>
-                <LoginBtn />
+                <AuthenticationBtn link='/login' content='Log In'/>
               </div>
+              {/* <div className='font-semibold text-[1.2rem]'>
+                <AuthenticationBtn link='/' content='Log Out'/>
+              </div> */}
               <div className='font-semibold text-[1.2rem]'>
                 <SignupBtn />
               </div>

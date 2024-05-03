@@ -1,6 +1,10 @@
 import React, { useState } from 'react'
 import Input from '../Input/Input'
 import SubmitBtn from '../Buttons/SubmitBtn';
+import authenticationServices from '../../appwrite/auth';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login } from '../../features/authSlice.js'
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -8,6 +12,8 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleName = (e) => {
     setName(e.target.value)
@@ -30,8 +36,27 @@ const SignUp = () => {
     setUsername(e.target.value)
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const createdUser = await authenticationServices.createAccount({
+        email: email.trim(),
+        password,
+        username,
+        fullname: name,
+      })
+
+      if (createdUser) {
+        dispatch(login({ userData: createdUser }))
+        navigate('/')
+      } else {
+        console.log("Error in siginingUp")
+      }
+    } catch (error) {
+      console.log("Error in sign up: ", error.message)
+      throw error
+    }
+
   }
 
 

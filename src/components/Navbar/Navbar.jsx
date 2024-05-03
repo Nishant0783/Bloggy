@@ -3,20 +3,32 @@ import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import LoginBtn from '../Buttons/LoginBtn';
+import AuthenticationBtn from '../Buttons/AuthenticationBtn.jsx';
 import SignupBtn from '../Buttons/SignupBtn';
+import { useDispatch, useSelector } from 'react-redux';
+import authenticationServices from '../../appwrite/auth.js';
+import { logout } from '../../features/authSlice.js';
 
 const Navbar = () => {
     const location = useLocation();
+    const authStatus = useSelector((state) => state.auth.status)
+    const dispatch = useDispatch()
+    console.log(authStatus)
 
     const isLoginOrSignup = () => {
         return location.pathname === '/login' || location.pathname === '/signup'
     }
 
-    if(isLoginOrSignup()) {
+    if (isLoginOrSignup()) {
         return null;
     }
-    
+
+    const handleLogout = () => {
+        authenticationServices.logoutUser().then(()=> (
+            dispatch(logout())
+        ))
+    }
+
     return (
         <div className='w-full bg-gray-100'>
             <div className='grid grid-cols-3 text-[1.3rem] font-[500] font-navbar max-w-[1500px] mx-auto py-[10px] px-[50px] max-[896px]:text-[1rem] max-[1024px]:text-[1.1rem] max-[510px]:grid-cols-2 '>
@@ -52,12 +64,36 @@ const Navbar = () => {
                 </div>
 
                 <div className='col-span-1 flex justify-end gap-x-[50px] items-center max-[1168px]:gap-x-[25px] max-[1024px]:text-[1.1rem] max-[510px]:hidden whitespace-nowrap'>
-                    <div className='flex max-[769px]:hidden'>
-                        <LoginBtn />
-                    </div>
-                    <div className='flex'>
-                       <SignupBtn />
-                    </div>
+                    {/* {
+                        !authStatus && <div className='flex max-[769px]:hidden'>
+                            <AuthenticationBtn link='/login' content='Log In' />
+                        </div>
+                    } */}
+
+                    {
+                        authStatus ? (<div className='flex max-[769px]:hidden'>
+                            <AuthenticationBtn link='/' content='Log Out' onClick={handleLogout}/>
+                        </div>) :
+                            (
+                                <>
+                                    <div className='flex max-[769px]:hidden'>
+                                        <AuthenticationBtn link='/login' content='Log In' />
+                                    </div>
+
+                                    <div className='flex'>
+                                        <SignupBtn />
+                                    </div>
+                                </>
+
+                            )
+                    }
+
+                    {/* {
+                        !authStatus && <div className='flex'>
+                            <SignupBtn />
+                        </div>
+                    } */}
+
                 </div>
             </div>
         </div>
