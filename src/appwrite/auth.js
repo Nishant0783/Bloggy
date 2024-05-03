@@ -16,7 +16,9 @@ export class AuthenticationServices {
     async createAccount({fullname, email, password, username, profilePicture}) {
         try {
             const userAccount = await this.account.create( ID.unique(), email, password, username,  fullname, profilePicture )
+            // console.log(userAccount);   
             if(userAccount) {
+                localStorage.setItem('loginStatus', true)
                 return this.loginUser({email, password})
             }else {
                 console.log("Error in logging in user just after creation")
@@ -30,7 +32,9 @@ export class AuthenticationServices {
 
     async loginUser({ email, password }) {
         try {
-            return await this.account.createEmailPasswordSession(email, password)
+            const session = await this.account.createEmailPasswordSession(email, password)
+            localStorage.setItem('loginStatus', true)
+            return session 
         }catch(err) {
             console.log("Error in logging in user: ", err.message)
             throw err
@@ -48,6 +52,7 @@ export class AuthenticationServices {
 
     async logoutUser() {
         try {
+            localStorage.setItem('loginStatus', false)
             await this.account.deleteSessions()
         } catch (err) {
             console.log("Error in logging out user: ", err.message)

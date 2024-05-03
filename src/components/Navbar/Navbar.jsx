@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,18 +10,18 @@ import authenticationServices from '../../appwrite/auth.js';
 import { logout } from '../../features/authSlice.js';
 
 const Navbar = () => {
-    const location = useLocation();
+    // const location = useLocation();
     const authStatus = useSelector((state) => state.auth.status)
     const dispatch = useDispatch()
     console.log(authStatus)
 
-    const isLoginOrSignup = () => {
-        return location.pathname === '/login' || location.pathname === '/signup'
-    }
+    // const isLoginOrSignup = () => {
+    //     return location.pathname === '/login' || location.pathname === '/signup'
+    // }
 
-    if (isLoginOrSignup()) {
-        return null;
-    }
+    // if (isLoginOrSignup()) {
+    //     return null;
+    // }
 
     const handleLogout = () => {
         authenticationServices.logoutUser().then(()=> (

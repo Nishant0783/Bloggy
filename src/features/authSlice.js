@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+const loginStatus = localStorage.getItem('loginStatus')
 const initialState = {
-    status: false,
+    status: loginStatus,
     userData: null,
 }
 
