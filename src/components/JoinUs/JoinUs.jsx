@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import joinUs from '../../assets/joinUs.jpg';
 import CreateBlogBtn from '../Buttons/CreateBlogBtn';
+import { useSelector } from 'react-redux';
 
 const JoinUs = () => {
+    const authStatus = useSelector((state) => state.auth.status)
+    const [link, setLink] = useState('');
+    useEffect(() => {
+        if (authStatus) {
+            setLink('/create-blog');
+        } else {
+            setLink('/login');
+        }
+    }, [authStatus]);
+
     return (
         <div className='w-full'>
             <div className='max-w-[1500px] mx-auto px-[50px]'>
@@ -18,7 +29,7 @@ const JoinUs = () => {
                         </div>
 
                         <div>
-                            <CreateBlogBtn mediaClasses={'max-[400px]:px-[20px] max-[400px]:text-[1rem]'}/>
+                            <CreateBlogBtn mediaClasses={'max-[400px]:px-[20px] max-[400px]:text-[1rem]'} link={link} />
                         </div>
                     </div>
                     <div className='col-span-1 flex justify-center items-center order-1'>

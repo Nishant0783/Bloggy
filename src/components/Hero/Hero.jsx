@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import heroFm from '../../assets/heroFm.jpg';
 import heroMan from '../../assets/heroMan.jpg';
 import CreateBlogBtn from '../Buttons/CreateBlogBtn';
@@ -7,14 +7,13 @@ import { useSelector } from 'react-redux';
 const Hero = () => {
     const authStatus = useSelector((state) => state.auth.status)
     const [link, setLink] = useState('');
-    const getAuthStatus = async () => {
-        if(authStatus){
-            setLink('/create-blog')
+    useEffect(() => {
+        if (authStatus) {
+            setLink('/create-blog');
         } else {
-            setLink('/login')
+            setLink('/login');
         }
-    }
-
+    }, [authStatus]);
 
     return (
         <div className='w-full bg-gray-200'>
@@ -35,7 +34,7 @@ const Hero = () => {
                             <p>How about starting your blogging journey with us for free ?</p>
                         </div>
                         <div>
-                           <CreateBlogBtn link={link} onClick={getAuthStatus}/>
+                           <CreateBlogBtn link={link}/>
                         </div>
                     </div>
                 </div>
