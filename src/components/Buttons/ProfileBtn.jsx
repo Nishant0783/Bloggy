@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import AuthenticationBtn from './AuthenticationBtn';
 import authenticationServices from '../../appwrite/auth.js';
 import { logout } from '../../features/authSlice.js';
@@ -8,6 +8,20 @@ import loginIcon from '../../assets/loginIcon.png';
 const ProfileBtn = ({classes}) => {
     const dispatch = useDispatch();
     const [dropdownVisible, setDropdownVisible] = useState(false);
+    const dropdownRef = useRef()
+
+    useEffect(() => {
+        const handleClickOutside = (e) => {
+            if(dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setDropdownVisible(false)
+            }
+        };
+        
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
 
     const handleLogout = () => {
         authenticationServices.logoutUser().then(() => (
@@ -20,7 +34,7 @@ const ProfileBtn = ({classes}) => {
     };
 
     return (
-        <div className='relative font-body text-[#2c2c2c] cursor-pointer'>
+        <div className='relative font-body text-[#2c2c2c] cursor-pointer' ref={dropdownRef}>
             <img src={loginIcon} className='w-[60px] h-[60px]' onClick={toggleDropdown} />
             {dropdownVisible && (
                 <div className={`absolute top-full ${classes} w-[150px] px-[10px] bg-gray-100 border border-gray-200 shadow-md rounded-md z-10 flex flex-col py-[10px] gap-y-[10px]`}>
