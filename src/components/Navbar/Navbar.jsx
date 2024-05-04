@@ -5,15 +5,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import AuthenticationBtn from '../Buttons/AuthenticationBtn.jsx';
 import SignupBtn from '../Buttons/SignupBtn';
-import { useDispatch, useSelector } from 'react-redux';
-import authenticationServices from '../../appwrite/auth.js';
-import { logout } from '../../features/authSlice.js';
+import { useSelector } from 'react-redux';
+import ProfileBtn from '../Buttons/ProfileBtn.jsx';
+
 
 const Navbar = () => {
     const location = useLocation();
     const authStatus = useSelector((state) => state.auth.status)
     console.log('auth status: ', authStatus)
-    const dispatch = useDispatch()
+  
 
     const isLoginOrSignup = () => {
         return location.pathname === '/login' || location.pathname === '/signup'
@@ -23,11 +23,7 @@ const Navbar = () => {
         return null;
     }
 
-    const handleLogout = () => {
-        authenticationServices.logoutUser().then(() => (
-            dispatch(logout())
-        ))
-    }
+   
 
     return (
         <div className='w-full bg-gray-100'>
@@ -67,7 +63,7 @@ const Navbar = () => {
                     {
                         authStatus ? (
                             <div className='flex max-[769px]:hidden'>
-                                <AuthenticationBtn link='/' content='Log Out' onClick={handleLogout} />
+                                <ProfileBtn /> 
                             </div>
                         ) :
                             (
