@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import brandLogo from '../../assets/logo.svg'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,13 +7,15 @@ import AuthenticationBtn from '../Buttons/AuthenticationBtn.jsx';
 import SignupBtn from '../Buttons/SignupBtn';
 import { useSelector } from 'react-redux';
 import ProfileBtn from '../Buttons/ProfileBtn.jsx';
+import MobileMenu from './MobileMenu.jsx';
 
 
 const Navbar = () => {
     const location = useLocation();
     const authStatus = useSelector((state) => state.auth.status)
     console.log('auth status: ', authStatus)
-  
+    const [mobileToggle, setMobileToggle] = useState(false)
+
 
     const isLoginOrSignup = () => {
         return location.pathname === '/login' || location.pathname === '/signup'
@@ -23,7 +25,9 @@ const Navbar = () => {
         return null;
     }
 
-   
+    const handleMobileToggle = () => {
+        setMobileToggle(!mobileToggle)
+    }
 
     return (
         <div className='w-full bg-gray-100'>
@@ -43,14 +47,17 @@ const Navbar = () => {
                 {/* HAMBURGER ICON START*/}
 
                 <div className='col-span-1 flex items-center min-[769px]:hidden'>
-                    <div className='text-[1.5rem]'>
+                    <div className='text-[1.5rem]' onClick={handleMobileToggle}>
                         <FontAwesomeIcon icon={faBars} />
                     </div>
 
                 </div>
 
                 {/* HAMBURGER ICON END*/}
+                {
+                    mobileToggle && <MobileMenu authStatus={authStatus} visibiltyClass={'min-[769px]:hidden'} />
 
+                }
 
 
                 <div className='col-span-1 flex justify-center items-center max-[510px]:justify-end'>
@@ -63,7 +70,7 @@ const Navbar = () => {
                     {
                         authStatus ? (
                             <div className='flex max-[769px]:hidden'>
-                                <ProfileBtn /> 
+                                <ProfileBtn classes={'left-[-50px]'} />
                             </div>
                         ) :
                             (
@@ -72,7 +79,7 @@ const Navbar = () => {
                                         <AuthenticationBtn link='/login' content='Log In' />
                                     </div>
 
-                                    <div className='flex'>
+                                    <div className='flex max-[769px]:hidden'>
                                         <SignupBtn />
                                     </div>
                                 </>

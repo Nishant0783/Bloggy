@@ -5,7 +5,7 @@ import { logout } from '../../features/authSlice.js';
 import { useDispatch } from 'react-redux';
 import loginIcon from '../../assets/loginIcon.png';
 
-const ProfileBtn = () => {
+const ProfileBtn = ({classes}) => {
     const dispatch = useDispatch();
     const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -23,7 +23,7 @@ const ProfileBtn = () => {
         <div className='relative font-body text-[#2c2c2c] cursor-pointer'>
             <img src={loginIcon} className='w-[60px] h-[60px]' onClick={toggleDropdown} />
             {dropdownVisible && (
-                <div className='absolute top-full left-[-50px] w-[150px] px-[10px] bg-gray-100 border border-gray-200 shadow-md rounded-md z-10 flex flex-col py-[10px] gap-y-[10px]'>
+                <div className={`absolute top-full ${classes} w-[150px] px-[10px] bg-gray-100 border border-gray-200 shadow-md rounded-md z-10 flex flex-col py-[10px] gap-y-[10px]`}>
 
                     <div className='border-b border-gray-300 pb-[3px] hover:border-gray-600'>
                         <button>
