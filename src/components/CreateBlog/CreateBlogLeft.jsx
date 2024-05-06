@@ -3,16 +3,10 @@ import { useRef } from 'react';
 import RTE from './RTE';
 
 const CreateBlogLeft = () => {
-
     const editorRef = useRef(null);
-    const log = () => {
-        if (editorRef.current) {
-            console.log(editorRef.current.getContent());
-        }
-    };
-
     const [title, setTitle] = useState('')
     const [slug, setSlug] = useState('')
+
     const handleTitle = (e) => {
         const newTitle = e.target.value
         setTitle(newTitle)
@@ -60,7 +54,7 @@ const CreateBlogLeft = () => {
                     <span>POST</span>
                 </div>
                 <RTE editorRef={editorRef} />
-                <button onClick={log}>Log editor content</button>
+                {/* <button onClick={log}>Log editor content</button> */}
             </div>
 
         </div>

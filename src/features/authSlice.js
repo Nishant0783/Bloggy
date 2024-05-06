@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-const loginStatus = localStorage.getItem('loginStatus')
 
 const initialState = {
     status: localStorage.getItem('loginStatus') === 'true' ? true : false,

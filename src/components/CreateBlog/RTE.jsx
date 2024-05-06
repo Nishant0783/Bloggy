@@ -1,12 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
-const RTE = ({editorRef}) => {
+
+const RTE = ({ editorRef }) => {
+
+    const handleContentChange = (content) => {
+    }
+
+    useEffect(() => {
+        if (editorRef.current) {
+            handleEditorChange(editorRef.current.getContent());
+        }
+    }, [editorRef]);
+    
     return (
         <div>
             <Editor
                 apiKey='p5ge4oc86sss87fvi40mcf66it76nrdiyram6853vi9gbdlj'
                 onInit={(_evt, editor) => editorRef.current = editor}
-                initialValue="<p>This is the initial content of the editor.</p>"
+                initialValue=""
+                onEditorChange={handleContentChange}
                 init={{
                     height: 700,
                     menubar: false,

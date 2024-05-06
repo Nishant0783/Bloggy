@@ -33,6 +33,11 @@ const ProfileBtn = ({classes}) => {
         setDropdownVisible(!dropdownVisible);
     };
 
+    const getProfile = async () => {
+        const user = await authenticationServices.getCurrentUser();
+        console.log("Logged in user is: ", user)
+    }
+
     return (
         <div className='relative font-body text-[#2c2c2c] cursor-pointer' ref={dropdownRef}>
             <img src={loginIcon} className='w-[60px] h-[60px]' onClick={toggleDropdown} />
@@ -40,7 +45,7 @@ const ProfileBtn = ({classes}) => {
                 <div className={`absolute top-full ${classes} w-[150px] px-[10px] bg-gray-100 border border-gray-200 shadow-md rounded-md z-10 flex flex-col py-[10px] gap-y-[10px]`}>
 
                     <div className='border-b border-gray-300 pb-[3px] hover:border-gray-600'>
-                        <button>
+                        <button onClick={getProfile}>
                             Profile
                         </button>
                     </div>

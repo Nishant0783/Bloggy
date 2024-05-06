@@ -5,6 +5,7 @@ import authenticationServices from '../../appwrite/auth';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/authSlice.js'
+import userService from '../../appwrite/userService.js';
 
 const SignUp = () => {
   const [name, setName] = useState('');
@@ -47,10 +48,19 @@ const SignUp = () => {
       })
 
       if (createdUser) {
-        dispatch(login({ userData: createdUser }))
-        navigate('/')
+        const user = await userService.createUser({
+          fullName: name,
+          email: email,
+          password: password,
+          username: username,
+        });
+        console.log("user in singup: ", user)
+        dispatch(login({ userData: createdUser }));
+        navigate('/');
+
       } else {
         console.log("Error in siginingUp")
+        navigate('/signup')
       }
     } catch (error) {
       console.log("Error in sign up: ", error.message)

@@ -4,8 +4,10 @@ const AddMedia = () => {
     const [image, setImage] = useState(null)
     const [errorMessage, setErrorMessage] = useState('')
 
-    const handleFileChange = (e) => {
+    const handleFileChange = async(e) => {
+        console.log(e.target.files)
         const file = e.target.files[0]
+        console.log("file is: ",file)
         if (file) {
             if (file.size > 1024 * 1024) {
                 setErrorMessage("Image should be less than 1MB.")

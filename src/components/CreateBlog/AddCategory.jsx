@@ -10,10 +10,6 @@ const AddCategory = () => {
     };
 
     const navLinks = [
-        // {
-        //     id: uuidv4(),
-        //     name: 'MOST RECENTS'
-        // },
         {
             id: uuidv4(),
             name: 'TECHNOLOGY',
