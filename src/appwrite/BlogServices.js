@@ -4,7 +4,7 @@ import conf from "../conf/conf";
 export class BlogServices {
     client = new Client();
     databases;
-    bucket;
+    // bucket;
 
     constructor () {
         this.client
@@ -12,7 +12,7 @@ export class BlogServices {
             .setProject(conf.appwriteProjectId)
 
         this.databases = new Databases(this.client)
-        this.bucket = new Storage(this.client)
+        // this.bucket = new Storage(this.client)
     }
 
     async createPost({ userId, title, content, slug, image, category }) {
@@ -36,6 +36,7 @@ export class BlogServices {
         }
     }
 
+    // Get single post
     async getPost(slug) {
         try {
             return await this.databases.getDocument(
@@ -48,6 +49,13 @@ export class BlogServices {
             throw error
         }
     }
+    
+
+    // Get all Posts
+    async getPosts() {
+        
+    }
+    
 }
 
 const blogServices = new BlogServices()

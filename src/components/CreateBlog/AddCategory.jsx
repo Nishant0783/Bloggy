@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
+import { updateCategory } from '../../features/blogFormSlice';
 
 
 const AddCategory = () => {
-    const [selectedOption, setSelectedOption] = useState('');
-
+    const [selectedOption, setSelectedOption] = useState(''); 
+    const dispatch = useDispatch();
     const handleSelectChange = (e) => {
         setSelectedOption(e.target.value);
+        dispatch(updateCategory(e.target.value))
     };
 
     const navLinks = [

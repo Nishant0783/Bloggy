@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import { useRef } from 'react';
 import RTE from './RTE';
+import { useDispatch } from 'react-redux';
+import { updateSlug, updateTitle } from '../../features/blogFormSlice';
 
 const CreateBlogLeft = () => {
     const editorRef = useRef(null);
+    const dispatch = useDispatch();
     const [title, setTitle] = useState('')
     const [slug, setSlug] = useState('')
 
@@ -12,6 +15,8 @@ const CreateBlogLeft = () => {
         setTitle(newTitle)
         const newSlug = generateSlug(newTitle);
         setSlug(newSlug);
+        dispatch(updateTitle(newTitle))
+        dispatch(updateSlug(newSlug))
     }
 
     const generateSlug = (title) => {

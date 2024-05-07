@@ -4,6 +4,7 @@ import AddCategory from './AddCategory'
 import PublishBlog from '../Buttons/PublishBlog'
 
 const CreateBlogRight = () => {
+  
   return (
     <div className='col-span-2 flex flex-col gap-y-[30px]'>
         <AddMedia />

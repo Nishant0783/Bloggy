@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { Editor } from '@tinymce/tinymce-react';
+import { useDispatch } from 'react-redux';
+import { updateContent } from '../../features/blogFormSlice';
 
 const RTE = ({ editorRef }) => {
+    const dispatch = useDispatch();
 
     const handleContentChange = (content) => {
+        dispatch(updateContent(content))
     }
 
     useEffect(() => {

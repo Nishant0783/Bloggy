@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateImage } from '../../features/blogFormSlice'
 
 const AddMedia = () => {
     const [image, setImage] = useState(null)
     const [errorMessage, setErrorMessage] = useState('')
+    const dispatch = useDispatch();
+
 
     const handleFileChange = async(e) => {
         console.log(e.target.files)
@@ -12,9 +16,11 @@ const AddMedia = () => {
             if (file.size > 1024 * 1024) {
                 setErrorMessage("Image should be less than 1MB.")
                 setImage(null)
+                dispatch(updateImage(null))
             } else {
                 setErrorMessage('')
                 setImage(file)
+                dispatch(updateImage(file.name))
             }
         }
     }

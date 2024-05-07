@@ -1,4 +1,4 @@
-import { Client, Databases, ID } from "appwrite";
+import { Client, Databases, ID, Query } from "appwrite";
 import conf from "../conf/conf";
 
 export class UserService {
@@ -27,6 +27,27 @@ export class UserService {
             )
         } catch (error) {
             console.log("Error in creating user for database: ", error.message)
+            throw error
+        }
+    }
+
+    async getUser(email) {
+        try {
+           const user = await this.databases.listDocuments(
+            conf.appwriteDatabaseId,
+            conf.appwriteUserTableId,
+            [
+                Query.equal('email', [email])
+            ]
+           ) 
+           if(user) {
+               console.log("User fetched successfully")
+               return user
+           } else {
+                console.log("Error in fetching user")
+           }
+        } catch (error) {
+            console.log("Error in finding user: ", error.message)
             throw error
         }
     }
