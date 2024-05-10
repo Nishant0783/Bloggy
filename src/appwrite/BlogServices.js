@@ -1,4 +1,4 @@
-import { Client, Databases, ID } from "appwrite";
+import { Client, Databases, ID, Query } from "appwrite";
 import conf from "../conf/conf";
 
 export class BlogServices {
@@ -37,13 +37,15 @@ export class BlogServices {
     }
 
     // Get single post
-    async getPost(slug) {
+    async getPost(postId) {
         try {
-            return await this.databases.getDocument(
+           return await this.databases.listDocuments(
                 conf.appwriteDatabaseId,
-                conf.appwriteDatabaseId,
-                slug
-            )
+                conf.appwriteBlogTableId,
+                [
+                    Query.equal('$id', [postId])
+                ]
+           )
         } catch (error) {
             console.log("Cannot get post from database: ", error.message)
             throw error
@@ -52,8 +54,16 @@ export class BlogServices {
     
 
     // Get all Posts
-    async getPosts() {
-        
+    async getAllPosts() {
+        try{
+            return await this.databases.listDocuments(
+                conf.appwriteDatabaseId,
+                conf.appwriteBlogTableId,
+            )
+        } catch(error) {
+            console.log("Cannot get all documents in collection: ", error.message)
+            throw error
+        }
     }
     
 }

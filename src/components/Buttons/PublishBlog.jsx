@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import authenticationServices from './../../appwrite/auth';
 import { useSelector } from 'react-redux';
 import userService from '../../appwrite/userService';
@@ -11,6 +11,7 @@ const PublishBlog = ({ mediaClasses, link, linkClasses }) => {
     console.log(state);
     return state.blogForm
   })
+  const navigate = useNavigate() 
 
   useEffect(() => {
     setData(postData)
@@ -19,8 +20,6 @@ const PublishBlog = ({ mediaClasses, link, linkClasses }) => {
   const handlePublishClick = async () => {
     const userId = await authenticationServices.getCurrentUser();
     const user = await userService.getUser(userId.email)
-    console.log(userId)
-    console.log("user is: ", user)
     try {
       const createdPost = await blogServices.createPost({
         userId: user.documents[0].$id,
@@ -29,16 +28,18 @@ const PublishBlog = ({ mediaClasses, link, linkClasses }) => {
 
       if(createdPost) {
         console.log("Post created successfully")
-        console.log(createdPost)
+        console.log(createdPost.$id)
+        const post = await blogServices.getPost(createdPost.$id)
+        console.log("Created post is: ", post)
+        // navigate('/blog/:')
       } else {
         console.log("Post creation failed")
-        console.log(createdPost)
       }
     } catch (error) {
       console.log("Error in creating post: ", error.message)
       throw error
     }
-    console.log(data)
+
   }
 
   return (

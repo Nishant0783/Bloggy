@@ -41,7 +41,12 @@ const router = createBrowserRouter([
       {
         path: "create-blog",
         element: <CreateBlog />
-      }
+      },
+      // {
+      //   path: '/blog/:blogId',
+      //   element: <h5>{`Your blog id is: ${blogId}`}</h5>
+      // }
+      
     ]
   }
 ])

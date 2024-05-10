@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateImage } from '../../features/blogFormSlice'
+import fileServices from '../../appwrite/fileServices'
 
 const AddMedia = () => {
     const [image, setImage] = useState(null)
@@ -10,7 +11,7 @@ const AddMedia = () => {
 
     const handleFileChange = async(e) => {
         console.log(e.target.files)
-        const file = e.target.files[0]
+        const file = e.target.files[0] ? await fileServices.uploadFile(e.target.files[0]) : null
         console.log("file is: ",file)
         if (file) {
             if (file.size > 1024 * 1024) {
@@ -19,8 +20,8 @@ const AddMedia = () => {
                 dispatch(updateImage(null))
             } else {
                 setErrorMessage('')
-                setImage(file)
-                dispatch(updateImage(file.name))
+                setImage(file.$id)
+                dispatch(updateImage(file.$id))
             }
         }
     }
@@ -40,11 +41,11 @@ const AddMedia = () => {
                     />
                 </div>
                 {errorMessage && <p className="text-red-500">{errorMessage}</p>}
-                {image && (
+                {/* {image && (
                     <p className="mt-2">
-                        Selected file: {image.name}
+                        Selected file: {file.name}
                     </p>
-                )}
+                )} */}
             </div>
         </div>
 
